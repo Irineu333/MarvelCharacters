@@ -54,18 +54,24 @@ dependencies {
     //ktx lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
+    //ktx lifecycle view model
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+
+    //ktx activity
+    implementation "androidx.activity:activity-ktx:1.4.0"
+
     //jetpack
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
     //dagger hilt
-    var hilt_version = "2.41"
+    def hilt_version = "2.41"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     //retrofit
-    var retrofit_version = "2.9.0"
+    def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
@@ -73,6 +79,9 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    //paging
+    implementation "androidx.paging:paging-runtime:3.1.1"
 
     //tests
     testImplementation 'junit:junit:4.13.2'

@@ -5,7 +5,6 @@ import com.neo.marvelcharacters.util.Hash
 import okhttp3.Interceptor
 import okhttp3.Response
 
-
 class MarvelApiCredential : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 

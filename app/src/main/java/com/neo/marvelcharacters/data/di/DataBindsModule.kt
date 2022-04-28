@@ -1,7 +1,13 @@
 package com.neo.marvelcharacters.data.di
 
+import androidx.paging.PagingConfig
 import com.neo.marvelcharacters.core.MarvelApi
 import com.neo.marvelcharacters.data.remote.interceptor.MarvelApiCredential
+import com.neo.marvelcharacters.data.remote.service.MarvelService
+import com.neo.marvelcharacters.data.repository.MarvelRepositoryImpl
+import com.neo.marvelcharacters.data.source.MarvelPagingSource
+import com.neo.marvelcharacters.domain.repository.MarvelRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +17,26 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataBindsModule {
+    @Singleton
+    @Binds
+    abstract fun bindsMarvelRepository(
+        repository: MarvelRepositoryImpl
+    ): MarvelRepository
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object DataProvidesModule {
+    @Singleton
+    @Provides
+    fun providesMarvelService(retrofit: Retrofit): MarvelService {
+        return retrofit.create(MarvelService::class.java)
+    }
+}
 
 @Module
 @InstallIn(SingletonComponent::class)
