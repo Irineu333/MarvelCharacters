@@ -7,5 +7,7 @@ data class MarvelCharacter(
     val thumbnail: Thumbnail
 ) {
 
-    data class Thumbnail(val extension: String, val path: String)
+    data class Thumbnail(val extension: String, val path: String) {
+        val url: String get() = "${path.replace("http", "https")}.$extension"
+    }
 }

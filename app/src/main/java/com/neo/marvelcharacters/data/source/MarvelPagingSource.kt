@@ -41,9 +41,7 @@ class MarvelPagingSource(
                 prevKey = prevKey,
                 nextKey = nextKey
             )
-        } catch (e: IOException) {
-            return LoadResult.Error(e)
-        } catch (e: HttpException) {
+        } catch (e: Exception) {
             return LoadResult.Error(e)
         }
     }
