@@ -3,6 +3,7 @@ package com.neo.marvelcharacters.presentation.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -57,11 +58,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         charactersAdapter.addLoadStateListener { loadState ->
+
             if (loadState.refresh is LoadState.Error) {
                 binding.showSnackbar(
                     message = "Ops, deu erro aqui!"
                 )
             }
+
+            binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
         }
     }
 
