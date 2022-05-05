@@ -10,6 +10,8 @@ import coil.load
 import com.neo.marvelcharacters.R
 import com.neo.marvelcharacters.databinding.ItemMarvelCharacterBinding
 import com.neo.marvelcharacters.domain.model.MarvelCharacter
+import com.neo.marvelcharacters.util.extensions.dp
+import com.neo.marvelcharacters.util.extensions.updateMargins
 
 class CharactersAdapter(
     differCallback: DiffUtil.ItemCallback<MarvelCharacter>
@@ -33,6 +35,8 @@ class CharactersAdapter(
         character?.run {
             holder.bind(character)
         }
+
+        holder.isLastItem = position == itemCount.dec()
     }
 
     class Holder(
@@ -42,11 +46,23 @@ class CharactersAdapter(
         private val row = binding.row
         private val shimmer = binding.shimmer
 
+        private val context get() = itemView.context
+
         var isPlaceHolder: Boolean = false
             set(value) {
                 field = value
                 row.root.isVisible = !value
                 shimmer.root.isVisible = value
+            }
+
+        var isLastItem: Boolean = false
+            set(value) {
+                field = value
+                itemView.updateMargins(
+                    bottom = if (value)
+                        4.dp.toPx(context.resources).toInt()
+                    else 0
+                )
             }
 
         fun bind(character: MarvelCharacter) {
@@ -59,3 +75,4 @@ class CharactersAdapter(
         }
     }
 }
+
