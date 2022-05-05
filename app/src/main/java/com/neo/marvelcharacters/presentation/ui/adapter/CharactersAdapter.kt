@@ -7,6 +7,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.neo.marvelcharacters.R
 import com.neo.marvelcharacters.databinding.ItemMarvelCharacterBinding
 import com.neo.marvelcharacters.domain.model.MarvelCharacter
 
@@ -49,7 +50,10 @@ class CharactersAdapter(
             }
 
         fun bind(character: MarvelCharacter) {
-            row.ivThumbnail.load(character.thumbnail.url)
+            row.ivThumbnail.load(character.thumbnail.url) {
+                placeholder(R.drawable.ic_image)
+                error(R.drawable.ic_broken_image)
+            }
             row.tvName.text = character.name
             row.tvDescription.text = character.description
         }

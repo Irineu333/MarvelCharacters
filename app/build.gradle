@@ -96,6 +96,8 @@ dependencies {
         because("makes create placeholders easier")
     }
 
+    implementation "com.airbnb.android:lottie:3.4.0"
+
     //tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

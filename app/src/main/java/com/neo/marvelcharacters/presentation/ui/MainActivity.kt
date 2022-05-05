@@ -61,11 +61,17 @@ class MainActivity : AppCompatActivity() {
 
             if (error) {
                 binding.showSnackbar(
-                    message = "Ops, deu erro aqui!"
+                    message = "Sem conexão!"
                 )
             }
 
-            binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+            if (loadState.refresh is LoadState.Loading) {
+                binding.progressBar.isVisible = true
+                binding.progressBar.playAnimation()
+            } else {
+                binding.progressBar.isVisible = false
+                binding.progressBar.pauseAnimation()
+            }
         }
     }
 

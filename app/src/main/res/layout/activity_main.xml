@@ -36,10 +36,13 @@
         tools:itemCount="10"
         tools:listitem="@layout/row_marvel_character" />
 
-    <ProgressBar
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_colorFilter="?attr/colorPrimary"
+        app:lottie_loop="true"
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/loading_animation"
         app:layout_constraintBottom_toBottomOf="@id/rv_characters"
         app:layout_constraintEnd_toEndOf="@id/app_bar"
         app:layout_constraintStart_toStartOf="@id/app_bar"
