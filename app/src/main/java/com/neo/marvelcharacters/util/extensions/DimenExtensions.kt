@@ -1,5 +1,6 @@
 package com.neo.marvelcharacters.util.extensions
 
+import android.content.Context
 import android.content.res.Resources
 import com.neo.marvelcharacters.R
 
@@ -10,5 +11,9 @@ data class Dp(
 ) {
     fun toPx(resources: Resources): Float {
         return value.toFloat() * resources.getDimension(R.dimen.dimen_1dp)
+    }
+
+    fun toPx(context: Context): Float {
+        return toPx(context.resources)
     }
 }

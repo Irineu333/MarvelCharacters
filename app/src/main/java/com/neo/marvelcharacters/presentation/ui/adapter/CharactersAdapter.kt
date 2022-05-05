@@ -59,9 +59,7 @@ class CharactersAdapter(
             set(value) {
                 field = value
                 itemView.updateMargins(
-                    bottom = if (value)
-                        4.dp.toPx(context.resources).toInt()
-                    else 0
+                    bottom = if (value) 4.dp.toPx(context).toInt() else 0
                 )
             }
 
