@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
+            app:titleTextColor="?attr/colorOnPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="@string/app_name"
@@ -33,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar"
         tools:itemCount="10"
-        tools:listitem="@layout/item_marvel_character" />
+        tools:listitem="@layout/row_marvel_character" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -9,18 +9,18 @@ import com.neo.marvelcharacters.domain.repository.MarvelRepository
 import javax.inject.Inject
 
 class MarvelRepositoryImpl @Inject constructor(
-    private val service: MarvelService
+    private val service: MarvelService,
+    private val pagingSource: MarvelPagingSource
 ) : MarvelRepository {
 
     override suspend fun getCharacters() = Pager(
         config = PagingConfig(
             pageSize = defaultPageSize,
-            enablePlaceholders = false
+            enablePlaceholders = true,
+            initialLoadSize = defaultPageSize
         ),
         pagingSourceFactory = {
-            MarvelPagingSource(
-                service = service
-            )
+            pagingSource
         }
     ).flow
 }

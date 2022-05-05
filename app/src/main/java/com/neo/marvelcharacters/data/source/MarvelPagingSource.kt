@@ -6,8 +6,6 @@ import com.neo.marvelcharacters.core.MarvelApi.defaultPageSize
 import com.neo.marvelcharacters.data.remote.response.toDomain
 import com.neo.marvelcharacters.data.remote.service.MarvelService
 import com.neo.marvelcharacters.domain.model.MarvelCharacter
-import retrofit2.HttpException
-import java.io.IOException
 
 class MarvelPagingSource(
     private val service: MarvelService
@@ -23,23 +21,27 @@ class MarvelPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MarvelCharacter> {
         try {
 
-            val currentKey = params.key
-            val nextKey = currentKey?.plus(defaultPageSize) ?: 0
-            val prevKey = currentKey?.let {
-                if (currentKey > defaultPageSize) currentKey - defaultPageSize else null
-            }
+            val currentKey = params.key ?: 0
 
             val response = service.getCharacters(
-                offset = nextKey,
+                offset = currentKey,
                 limit = defaultPageSize
             )
 
-            val marvelCharacters = response.data.results.toDomain()
+            val data = response.data
+
+            val nextKey = currentKey + data.count
+
+            val prevKey = if (currentKey == defaultPageSize) currentKey - defaultPageSize else null
+
+            val marvelCharacters = data.results.toDomain()
 
             return LoadResult.Page(
                 data = marvelCharacters,
                 prevKey = prevKey,
-                nextKey = nextKey
+                nextKey = nextKey,
+                itemsBefore = currentKey,
+                itemsAfter = nextKey
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

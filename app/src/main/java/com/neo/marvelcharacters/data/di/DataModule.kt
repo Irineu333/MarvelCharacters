@@ -1,6 +1,5 @@
 package com.neo.marvelcharacters.data.di
 
-import androidx.paging.PagingConfig
 import com.neo.marvelcharacters.core.MarvelApi
 import com.neo.marvelcharacters.data.remote.interceptor.MarvelApiCredential
 import com.neo.marvelcharacters.data.remote.service.MarvelService
@@ -35,6 +34,14 @@ object DataProvidesModule {
     @Provides
     fun providesMarvelService(retrofit: Retrofit): MarvelService {
         return retrofit.create(MarvelService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesMarvelPagingSourceService(service: MarvelService): MarvelPagingSource {
+        return MarvelPagingSource(
+            service = service
+        )
     }
 }
 

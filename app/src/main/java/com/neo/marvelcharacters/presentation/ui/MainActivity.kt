@@ -12,7 +12,6 @@ import com.neo.marvelcharacters.data.remote.service.MarvelService
 import com.neo.marvelcharacters.databinding.ActivityMainBinding
 import com.neo.marvelcharacters.presentation.model.MarvelCharacterDiff
 import com.neo.marvelcharacters.presentation.ui.adapter.CharactersAdapter
-import com.neo.marvelcharacters.presentation.ui.adapter.LoadingAdapter
 import com.neo.marvelcharacters.presentation.viewmodel.MainViewModel
 import com.neo.marvelcharacters.util.extensions.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,15 +50,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() = with(binding) {
-        rvCharacters.adapter = charactersAdapter.withLoadStateFooter(
-            footer = LoadingAdapter()
-        )
+        rvCharacters.adapter = charactersAdapter
     }
 
     private fun setupListeners() {
         charactersAdapter.addLoadStateListener { loadState ->
 
-            if (loadState.refresh is LoadState.Error) {
+            val error = loadState.refresh is LoadState.Error ||
+                    loadState.append is LoadState.Error
+
+            if (error) {
                 binding.showSnackbar(
                     message = "Ops, deu erro aqui!"
                 )

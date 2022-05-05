@@ -2,6 +2,7 @@ package com.neo.marvelcharacters.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -24,19 +25,33 @@ class CharactersAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val character = getItem(position) ?: return
+        val character = getItem(position)
 
-        holder.bind(character)
+        holder.isPlaceHolder = character == null
+
+        character?.run {
+            holder.bind(character)
+        }
     }
 
     class Holder(
-        private val binding: ItemMarvelCharacterBinding
+        binding: ItemMarvelCharacterBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val row = binding.row
+        private val shimmer = binding.shimmer
+
+        var isPlaceHolder: Boolean = false
+            set(value) {
+                field = value
+                row.root.isVisible = !value
+                shimmer.root.isVisible = value
+            }
+
         fun bind(character: MarvelCharacter) {
-            binding.ivThumbnail.load(character.thumbnail.url)
-            binding.tvName.text = character.name
-            binding.tvDescription.text = character.description
+            row.ivThumbnail.load(character.thumbnail.url)
+            row.tvName.text = character.name
+            row.tvDescription.text = character.description
         }
     }
 }
