@@ -4,6 +4,6 @@ import androidx.paging.PagingData
 import com.neo.marvelcharacters.domain.model.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
 
-interface GetCharacters {
+interface GetPaginatedCharacters {
     suspend operator fun invoke(): Flow<PagingData<MarvelCharacter>>
 }

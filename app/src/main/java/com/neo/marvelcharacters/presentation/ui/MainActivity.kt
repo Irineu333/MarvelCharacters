@@ -5,16 +5,18 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import com.neo.marvelcharacters.data.remote.service.MarvelService
 import com.neo.marvelcharacters.databinding.ActivityMainBinding
 import com.neo.marvelcharacters.presentation.model.MarvelCharacterDiff
 import com.neo.marvelcharacters.presentation.ui.adapter.CharactersAdapter
+import com.neo.marvelcharacters.presentation.viewmodel.MainUiEffect
 import com.neo.marvelcharacters.presentation.viewmodel.MainViewModel
 import com.neo.marvelcharacters.util.extensions.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         setupListeners()
         setupObservers()
 
-        viewModel.getAllCharacters()
+        viewModel.requestFirstCharacters()
+        viewModel.requestPaginatedCharacters()
     }
 
     private fun setupView() = with(binding) {
@@ -60,9 +63,7 @@ class MainActivity : AppCompatActivity() {
                     loadState.append is LoadState.Error
 
             if (error) {
-                binding.showSnackbar(
-                    message = "Sem conexão!"
-                )
+                showConnectionError()
             }
 
             if (loadState.refresh is LoadState.Loading) {
@@ -76,11 +77,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() = lifecycleScope.launch {
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-            .collectLatest { state ->
-                charactersAdapter.submitData(state.characters)
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            launch {
+                viewModel.uiState.collectLatest { state ->
+                    charactersAdapter.submitData(state.paginatedCharacters)
+                }
             }
+
+            launch {
+                viewModel.uiEffect.collect { effect ->
+                    when (effect) {
+                        MainUiEffect.Error -> showConnectionError()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showConnectionError() {
+        binding.showSnackbar(
+            message = "Sem conexão!"
+        )
     }
 
 }

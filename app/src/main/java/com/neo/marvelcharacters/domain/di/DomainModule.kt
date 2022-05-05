@@ -1,9 +1,9 @@
 package com.neo.marvelcharacters.domain.di
 
-import com.neo.marvelcharacters.data.repository.MarvelRepositoryImpl
-import com.neo.marvelcharacters.domain.repository.MarvelRepository
-import com.neo.marvelcharacters.domain.usercase.GetCharacters
-import com.neo.marvelcharacters.domain.usercase.impl.GetCharactersImpl
+import com.neo.marvelcharacters.domain.usercase.GetFirstCharacters
+import com.neo.marvelcharacters.domain.usercase.GetPaginatedCharacters
+import com.neo.marvelcharacters.domain.usercase.impl.GetFirstCharactersImpl
+import com.neo.marvelcharacters.domain.usercase.impl.GetPaginatedCharactersImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,7 +15,13 @@ import javax.inject.Singleton
 abstract class UseCaseModule {
     @Singleton
     @Binds
-    abstract fun bindsGetCharacters(
-        getCharacters: GetCharactersImpl
-    ): GetCharacters
+    abstract fun bindsGetPaginatedCharacters(
+        getCharacters: GetPaginatedCharactersImpl
+    ): GetPaginatedCharacters
+
+    @Singleton
+    @Binds
+    abstract fun bindsGetFirstCharacters(
+        getPaginatedCharacters: GetFirstCharactersImpl
+    ): GetFirstCharacters
 }
