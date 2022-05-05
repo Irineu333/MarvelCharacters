@@ -21,27 +21,27 @@ class MarvelPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MarvelCharacter> {
         try {
 
-            val currentKey = params.key ?: 0
+            val offset = params.key ?: 0
 
             val response = service.getCharacters(
-                offset = currentKey,
+                offset = offset,
                 limit = defaultPageSize
             )
 
             val data = response.data
 
-            val nextKey = currentKey + data.count
+            val nextOffset = offset + data.count
 
-            val prevKey = if (currentKey == defaultPageSize) currentKey - defaultPageSize else null
+            val prevOffset = if (offset >= defaultPageSize) offset - defaultPageSize else null
 
             val marvelCharacters = data.results.toDomain()
 
             return LoadResult.Page(
                 data = marvelCharacters,
-                prevKey = prevKey,
-                nextKey = nextKey,
-                itemsBefore = currentKey,
-                itemsAfter = nextKey
+                prevKey = prevOffset,
+                nextKey = nextOffset,
+                itemsBefore = offset,
+                itemsAfter = nextOffset
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
