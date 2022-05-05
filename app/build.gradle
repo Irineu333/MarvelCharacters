@@ -52,13 +52,14 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
 
     //ktx lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
-
-    //ktx lifecycle view model
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation ('androidx.lifecycle:lifecycle-runtime-ktx:2.4.1') {
+        because("flow lifecycle aware")
+    }
 
     //ktx activity
-    implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation ("androidx.activity:activity-ktx:1.4.0") {
+        because("makes using the view model easier")
+    }
 
     //layout
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -81,13 +82,19 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
 
     //coil-kt
-    implementation("io.coil-kt:coil:1.4.0")
+    implementation('io.coil-kt:coil:1.4.0') {
+        because("makes loading images easier with kotlin")
+    }
 
     //paging
-    implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation('androidx.paging:paging-runtime:3.1.1') {
+        because("makes paginations easier")
+    }
 
     //facebook shimmer
-    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation('com.facebook.shimmer:shimmer:0.5.0') {
+        because("makes create placeholders easier")
+    }
 
     //tests
     testImplementation 'junit:junit:4.13.2'
