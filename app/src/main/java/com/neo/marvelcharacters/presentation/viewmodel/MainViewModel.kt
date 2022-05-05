@@ -40,6 +40,8 @@ class MainViewModel @Inject constructor(
                             firstCharactersLoading = false,
                         )
                     }
+
+                    _uiEffect.emit(MainUiEffect.Error)
                 }
                 Resource.Loading -> {
                     _uiState.update { state ->
