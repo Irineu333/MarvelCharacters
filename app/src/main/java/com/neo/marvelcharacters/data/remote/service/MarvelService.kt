@@ -1,6 +1,6 @@
-package com.neo.marvelcharacters.data.remote.service
+package com.neo.marvelCharacters.data.remote.service
 
-import com.neo.marvelcharacters.data.remote.response.MarvelCharactersResponse
+import com.neo.marvelCharacters.data.remote.response.MarvelCharactersResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

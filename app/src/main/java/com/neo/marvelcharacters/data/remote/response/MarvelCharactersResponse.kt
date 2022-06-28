@@ -1,7 +1,7 @@
-package com.neo.marvelcharacters.data.remote.response
+package com.neo.marvelCharacters.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
 
 data class MarvelCharactersResponse(
     @SerializedName("data")

@@ -1,8 +1,8 @@
-package com.neo.marvelcharacters.domain.repository
+package com.neo.marvelCharacters.domain.repository
 
 import androidx.paging.PagingData
-import com.neo.marvelcharacters.core.Resource
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.core.Resource
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
 
 interface MarvelRepository {

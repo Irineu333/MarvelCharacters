@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.presentation.ui.adapter
+package com.neo.marvelCharacters.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.neo.marvelcharacters.R
-import com.neo.marvelcharacters.databinding.ItemMarvelCharacterBinding
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
-import com.neo.marvelcharacters.util.extensions.dp
-import com.neo.marvelcharacters.util.extensions.updateMargins
+import com.neo.marvelCharacters.R
+import com.neo.marvelCharacters.databinding.ItemMarvelCharacterBinding
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.util.extensions.dp
+import com.neo.marvelCharacters.util.extensions.updateMargins
 
 class CharactersAdapter(
     differCallback: DiffUtil.ItemCallback<MarvelCharacter>

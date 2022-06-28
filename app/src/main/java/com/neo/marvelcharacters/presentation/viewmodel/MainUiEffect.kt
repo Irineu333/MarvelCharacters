@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.presentation.viewmodel
+package com.neo.marvelCharacters.presentation.viewmodel
 
 sealed class MainUiEffect {
     object Error : MainUiEffect()

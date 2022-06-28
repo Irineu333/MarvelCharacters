@@ -1,11 +1,11 @@
-package com.neo.marvelcharacters.data.source
+package com.neo.marvelCharacters.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.neo.marvelcharacters.core.MarvelApi.defaultPageSize
-import com.neo.marvelcharacters.data.remote.response.toDomain
-import com.neo.marvelcharacters.data.remote.service.MarvelService
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.core.MarvelApi.defaultPageSize
+import com.neo.marvelCharacters.data.remote.response.toDomain
+import com.neo.marvelCharacters.data.remote.service.MarvelService
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
 
 class MarvelPagingSource(
     private val service: MarvelService

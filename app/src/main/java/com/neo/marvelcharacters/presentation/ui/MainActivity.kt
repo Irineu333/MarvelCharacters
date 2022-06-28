@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.presentation.ui
+package com.neo.marvelCharacters.presentation.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -8,13 +8,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import com.neo.marvelcharacters.data.remote.service.MarvelService
-import com.neo.marvelcharacters.databinding.ActivityMainBinding
-import com.neo.marvelcharacters.presentation.model.MarvelCharacterDiff
-import com.neo.marvelcharacters.presentation.ui.adapter.CharactersAdapter
-import com.neo.marvelcharacters.presentation.viewmodel.MainUiEffect
-import com.neo.marvelcharacters.presentation.viewmodel.MainViewModel
-import com.neo.marvelcharacters.util.extensions.showSnackbar
+import com.neo.marvelCharacters.data.remote.service.MarvelService
+import com.neo.marvelCharacters.databinding.ActivityMainBinding
+import com.neo.marvelCharacters.presentation.model.MarvelCharacterDiff
+import com.neo.marvelCharacters.presentation.ui.adapter.CharactersAdapter
+import com.neo.marvelCharacters.presentation.viewmodel.MainUiEffect
+import com.neo.marvelCharacters.presentation.viewmodel.MainViewModel
+import com.neo.marvelCharacters.util.extensions.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest

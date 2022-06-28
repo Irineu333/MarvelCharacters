@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.util
+package com.neo.marvelCharacters.util
 
 import java.math.BigInteger
 import java.security.MessageDigest

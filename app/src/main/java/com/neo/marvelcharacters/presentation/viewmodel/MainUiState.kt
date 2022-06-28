@@ -1,7 +1,7 @@
-package com.neo.marvelcharacters.presentation.viewmodel
+package com.neo.marvelCharacters.presentation.viewmodel
 
 import androidx.paging.PagingData
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
 
 data class MainUiState(
     val paginatedCharacters: PagingData<MarvelCharacter> = PagingData.empty(),

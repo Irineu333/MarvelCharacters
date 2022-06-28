@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.domain.model
+package com.neo.marvelCharacters.domain.model
 
 data class MarvelCharacter(
     val id: Int,

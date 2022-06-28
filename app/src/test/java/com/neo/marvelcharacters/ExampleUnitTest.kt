@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters
+package com.neo.marvelCharacters
 
 import org.junit.Test
 

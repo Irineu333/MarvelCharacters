@@ -1,7 +1,7 @@
-package com.neo.marvelcharacters.domain.usercase.impl
+package com.neo.marvelCharacters.domain.usercase.impl
 
-import com.neo.marvelcharacters.domain.repository.MarvelRepository
-import com.neo.marvelcharacters.domain.usercase.GetPaginatedCharacters
+import com.neo.marvelCharacters.domain.repository.MarvelRepository
+import com.neo.marvelCharacters.domain.usercase.GetPaginatedCharacters
 import javax.inject.Inject
 
 class GetPaginatedCharactersImpl @Inject constructor(

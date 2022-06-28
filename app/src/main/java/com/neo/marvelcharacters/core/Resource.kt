@@ -1,6 +1,4 @@
-package com.neo.marvelcharacters.core
-
-import com.neo.marvelcharacters.data.remote.response.MarvelCharactersResponse
+package com.neo.marvelCharacters.core
 
 sealed class Resource<out T> {
     object Error : Resource<Nothing>()

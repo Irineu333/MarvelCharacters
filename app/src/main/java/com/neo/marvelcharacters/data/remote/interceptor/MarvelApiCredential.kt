@@ -1,7 +1,7 @@
-package com.neo.marvelcharacters.data.remote.interceptor
+package com.neo.marvelCharacters.data.remote.interceptor
 
-import com.neo.marvelcharacters.core.MarvelApi
-import com.neo.marvelcharacters.util.Hash
+import com.neo.marvelCharacters.core.MarvelApi
+import com.neo.marvelCharacters.util.Hash
 import okhttp3.Interceptor
 import okhttp3.Response
 

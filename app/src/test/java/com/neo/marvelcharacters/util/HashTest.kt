@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.util
+package com.neo.marvelCharacters.util
 
 import junit.framework.TestCase
 

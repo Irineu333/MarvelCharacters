@@ -1,11 +1,11 @@
-package com.neo.marvelcharacters.data.di
+package com.neo.marvelCharacters.data.di
 
-import com.neo.marvelcharacters.core.MarvelApi
-import com.neo.marvelcharacters.data.remote.interceptor.MarvelApiCredential
-import com.neo.marvelcharacters.data.remote.service.MarvelService
-import com.neo.marvelcharacters.data.repository.MarvelRepositoryImpl
-import com.neo.marvelcharacters.data.source.MarvelPagingSource
-import com.neo.marvelcharacters.domain.repository.MarvelRepository
+import com.neo.marvelCharacters.core.MarvelApi
+import com.neo.marvelCharacters.data.remote.interceptor.MarvelApiCredential
+import com.neo.marvelCharacters.data.remote.service.MarvelService
+import com.neo.marvelCharacters.data.repository.MarvelRepositoryImpl
+import com.neo.marvelCharacters.data.source.MarvelPagingSource
+import com.neo.marvelCharacters.domain.repository.MarvelRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

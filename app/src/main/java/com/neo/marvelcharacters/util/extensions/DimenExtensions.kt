@@ -1,8 +1,8 @@
-package com.neo.marvelcharacters.util.extensions
+package com.neo.marvelCharacters.util.extensions
 
 import android.content.Context
 import android.content.res.Resources
-import com.neo.marvelcharacters.R
+import com.neo.marvelCharacters.R
 
 val Int.dp get() = Dp(this)
 

@@ -1,10 +1,10 @@
-package com.neo.marvelcharacters.domain.usercase.impl
+package com.neo.marvelCharacters.domain.usercase.impl
 
-import com.neo.marvelcharacters.core.MarvelApi.firstCharacters
-import com.neo.marvelcharacters.core.Resource
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
-import com.neo.marvelcharacters.domain.repository.MarvelRepository
-import com.neo.marvelcharacters.domain.usercase.GetFirstCharacters
+import com.neo.marvelCharacters.core.MarvelApi.firstCharacters
+import com.neo.marvelCharacters.core.Resource
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.domain.repository.MarvelRepository
+import com.neo.marvelCharacters.domain.usercase.GetFirstCharacters
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

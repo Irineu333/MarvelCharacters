@@ -1,6 +1,6 @@
-package com.neo.marvelcharacters.core
+package com.neo.marvelCharacters.core
 
-import com.neo.marvelcharacters.BuildConfig
+import com.neo.marvelCharacters.BuildConfig
 
 object MarvelApi {
     const val BASE_URL = "https://gateway.marvel.com/v1/public/"

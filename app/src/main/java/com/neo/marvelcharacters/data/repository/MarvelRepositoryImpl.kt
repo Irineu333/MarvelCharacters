@@ -1,14 +1,14 @@
-package com.neo.marvelcharacters.data.repository
+package com.neo.marvelCharacters.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.neo.marvelcharacters.core.MarvelApi.defaultPageSize
-import com.neo.marvelcharacters.core.Resource
-import com.neo.marvelcharacters.data.remote.response.toDomain
-import com.neo.marvelcharacters.data.remote.service.MarvelService
-import com.neo.marvelcharacters.data.source.MarvelPagingSource
-import com.neo.marvelcharacters.domain.model.MarvelCharacter
-import com.neo.marvelcharacters.domain.repository.MarvelRepository
+import com.neo.marvelCharacters.core.MarvelApi.defaultPageSize
+import com.neo.marvelCharacters.core.Resource
+import com.neo.marvelCharacters.data.remote.response.toDomain
+import com.neo.marvelCharacters.data.remote.service.MarvelService
+import com.neo.marvelCharacters.data.source.MarvelPagingSource
+import com.neo.marvelCharacters.domain.model.MarvelCharacter
+import com.neo.marvelCharacters.domain.repository.MarvelRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

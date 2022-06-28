@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.util.extensions
+package com.neo.marvelCharacters.util.extensions
 
 import android.view.View
 import android.view.ViewGroup

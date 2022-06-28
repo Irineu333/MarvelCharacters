@@ -1,4 +1,4 @@
-package com.neo.marvelcharacters.util.extensions
+package com.neo.marvelCharacters.util.extensions
 
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
