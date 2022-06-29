@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+writeSecrets("apiKeys.properties", "app/src/main/cpp/secrets.cpp")
+
 android {
     compileSdk 31
 
@@ -55,12 +57,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
 
     //ktx lifecycle
-    implementation ('androidx.lifecycle:lifecycle-runtime-ktx:2.4.1') {
+    implementation('androidx.lifecycle:lifecycle-runtime-ktx:2.4.1') {
         because("flow lifecycle aware")
     }
 
     //ktx activity
-    implementation ("androidx.activity:activity-ktx:1.4.0") {
+    implementation("androidx.activity:activity-ktx:1.4.0") {
         because("makes using the view model easier")
     }
 
@@ -105,4 +107,45 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+
+private Properties getApiKeyProperties(String filePath) {
+    def apikeyProperties = new Properties()
+    def apikeyPropertiesFile = rootProject.file(filePath)
+    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+    return apikeyProperties
+}
+
+private void writeSecrets(String propertiesPath, String filePath) {
+
+    Properties apikeyProperties = getApiKeyProperties(propertiesPath)
+    
+    def secretsFile = rootProject.file(filePath)
+
+    if (secretsFile.exists()) {
+        return
+    }
+
+    def writer = new FileWriter(secretsFile)
+
+    writer.write("#include <jni.h>\n")
+    writer.write("\n")
+    writer.write("extern \"C\"\n")
+    writer.write("JNIEXPORT jstring JNICALL\n")
+    writer.write("Java_com_neo_marvelCharacters_Secrets_getPublicKey(\n")
+    writer.write("        JNIEnv *pEnv,\n")
+    writer.write("        jobject pThis) {\n")
+    writer.write(String.format("    return pEnv->NewStringUTF(%s);\n", apikeyProperties["PUBLIC_KEY"]))
+    writer.write("}\n")
+    writer.write("\n")
+    writer.write("extern \"C\"\n")
+    writer.write("JNIEXPORT jstring JNICALL\n")
+    writer.write("Java_com_neo_marvelCharacters_Secrets_getSecretKey(\n")
+    writer.write("        JNIEnv *pEnv,\n")
+    writer.write("        jobject pThis) {\n")
+    writer.write(String.format("    return pEnv->NewStringUTF(%s);\n", apikeyProperties["SECRET_KEY"]))
+    writer.write("}\n")
+
+    writer.close()
 }
