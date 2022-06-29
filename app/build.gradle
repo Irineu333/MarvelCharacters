@@ -119,13 +119,11 @@ private Properties getApiKeyProperties(String filePath) {
 
 private void writeSecrets(String propertiesPath, String filePath) {
 
-    Properties apikeyProperties = getApiKeyProperties(propertiesPath)
+    def apikeyProperties = getApiKeyProperties(propertiesPath)
     
     def secretsFile = rootProject.file(filePath)
 
-    if (secretsFile.exists()) {
-        return
-    }
+    if (secretsFile.exists()) return
 
     def writer = new FileWriter(secretsFile)
 
