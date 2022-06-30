@@ -8,6 +8,6 @@ object MarvelApi {
     const val defaultPageSize = 20
     const val firstCharacters = 5
 
-    val privateKey get() = Secrets().getSecretKey(App.context)
-    val publicKey get() = Secrets().getPublicKey(App.context)
+    val privateKey get() = Secrets.getSecretKey(App.context)
+    val publicKey get() = Secrets.getPublicKey(App.context)
 }

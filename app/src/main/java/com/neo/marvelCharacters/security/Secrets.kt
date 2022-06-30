@@ -2,12 +2,10 @@ package com.neo.marvelCharacters.security
 
 import android.content.Context
 
-class Secrets {
+object Secrets {
 
-    companion object {
-        init {
-            System.loadLibrary("secrets")
-        }
+    init {
+        System.loadLibrary("secrets")
     }
 
     external fun getPublicKey(context: Context): String
