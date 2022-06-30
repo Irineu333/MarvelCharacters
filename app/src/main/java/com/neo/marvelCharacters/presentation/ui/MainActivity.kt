@@ -99,5 +99,4 @@ class MainActivity : AppCompatActivity() {
             message = "Sem conexão!"
         )
     }
-
 }

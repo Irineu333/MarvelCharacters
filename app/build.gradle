@@ -5,7 +5,10 @@ plugins {
     id 'kotlin-kapt'
 }
 
-writeSecrets("apiKeys.properties", "app/src/main/cpp/secrets.cpp")
+createSecretsCpp(
+        "apiKeys.properties",
+        "app/src/main/cpp/secrets.cpp"
+)
 
 android {
     compileSdk 31
@@ -109,7 +112,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
-
 private Properties getApiKeyProperties(String filePath) {
     def apikeyProperties = new Properties()
     def apikeyPropertiesFile = rootProject.file(filePath)
@@ -117,35 +119,59 @@ private Properties getApiKeyProperties(String filePath) {
     return apikeyProperties
 }
 
-private void writeSecrets(String propertiesPath, String filePath) {
+private static String toCamelCase(String text) {
+    StringBuilder builder = new StringBuilder()
 
-    Properties apikeyProperties = getApiKeyProperties(propertiesPath)
+    boolean upperCase = true
+    for (char c : text) {
+        if (c == ('_' as char)) {
+            upperCase = true
+            continue
+        }
+
+        if (upperCase) {
+            builder.append("$c".toUpperCase())
+        } else {
+            builder.append("$c".toLowerCase())
+        }
+
+        upperCase = false
+    }
+
+    return builder.toString()
+}
+
+private void createSecretsCpp(String propertiesPath, String filePath) {
+
+    def apikeyProperties = getApiKeyProperties(propertiesPath)
     
     def secretsFile = rootProject.file(filePath)
-
-    if (secretsFile.exists()) {
-        return
-    }
 
     def writer = new FileWriter(secretsFile)
 
     writer.write("#include <jni.h>\n")
+    writer.write("#include \"security.cpp\"\n")
     writer.write("\n")
-    writer.write("extern \"C\"\n")
-    writer.write("JNIEXPORT jstring JNICALL\n")
-    writer.write("Java_com_neo_marvelCharacters_Secrets_getPublicKey(\n")
-    writer.write("        JNIEnv *pEnv,\n")
-    writer.write("        jobject pThis) {\n")
-    writer.write(String.format("    return pEnv->NewStringUTF(%s);\n", apikeyProperties["PUBLIC_KEY"]))
-    writer.write("}\n")
-    writer.write("\n")
-    writer.write("extern \"C\"\n")
-    writer.write("JNIEXPORT jstring JNICALL\n")
-    writer.write("Java_com_neo_marvelCharacters_Secrets_getSecretKey(\n")
-    writer.write("        JNIEnv *pEnv,\n")
-    writer.write("        jobject pThis) {\n")
-    writer.write(String.format("    return pEnv->NewStringUTF(%s);\n", apikeyProperties["SECRET_KEY"]))
-    writer.write("}\n")
+
+    apikeyProperties.each {
+        writer.write("const char *${it.key} = ${it.value};\n")
+    }
+
+    apikeyProperties.each {
+        writer.write("\n")
+        writer.write("extern \"C\"\n")
+        writer.write("JNIEXPORT jstring JNICALL\n")
+        writer.write("Java_com_neo_marvelCharacters_security_Secrets_get${toCamelCase(it.key)}(\n")
+        writer.write("        JNIEnv *pEnv,\n")
+        writer.write("        jobject pThis,\n")
+        writer.write("        jobject contextObject\n")
+        writer.write(") {\n")
+        writer.write("\n")
+        writer.write("    verifySignature(pEnv, contextObject);\n")
+        writer.write("\n")
+        writer.write("    return pEnv->NewStringUTF(${it.key});\n")
+        writer.write("}\n")
+    }
 
     writer.close()
 }
