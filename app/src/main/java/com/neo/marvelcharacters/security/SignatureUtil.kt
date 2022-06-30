@@ -7,7 +7,6 @@ import android.content.pm.Signature
 import android.os.Build
 import java.security.MessageDigest
 
-
 @Suppress("UNUSED")
 object SignatureUtil {
     private const val DEFAULT_ALGORITHM = "MD5"
