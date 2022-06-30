@@ -31,9 +31,9 @@ void verifySignature(JNIEnv *pEnv, const _jobject *contextObject) {
             pEnv->NewStringUTF(SHA256)
     );
 
-    const char *signature = pEnv->GetStringUTFChars(javaString, 0);
+    const char *appSignature = pEnv->GetStringUTFChars(javaString, nullptr);
 
-    if (strcmp(signature, SIGNATURE) != 0) {
+    if (strcmp(appSignature, SIGNATURE) != 0) {
         jclass exceptionClass = pEnv->FindClass("java/lang/IllegalArgumentException");
         pEnv->ThrowNew(exceptionClass, "Invalid signature");
     }
